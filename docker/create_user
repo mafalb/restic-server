@@ -1,0 +1,16 @@
+#!/bin/sh
+
+if [ -z "$1" ]; then
+    echo "create_user [username]"
+    echo "or"
+    echo "create_user [username] [password]"
+    exit 1
+fi
+
+if [ -z "$2" ]; then
+    # password from prompt
+    htpasswd -s $PASSWORD_FILE $1
+else
+    # read password from command line
+    htpasswd -s -b $PASSWORD_FILE $1 $2
+fi
